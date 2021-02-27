@@ -1,0 +1,43 @@
+﻿
+<div class="orderSuccessful">
+    <div class="banner1" style="background-color:rebeccapurple;width:100%;height: 100px"></div>
+    <div class="timeline">
+        <h3 class="timeline-title">Giao dịch thành công</h3>
+        <div class="timeline-clock circle-blue">
+            <div class="cicle-white">
+                <h3 class="number">3</h3>
+                <!-- <span class="number-item-1"></span>
+                <span class="number-item-2"></span>
+                <span class="number-item-3"></span> -->
+            </div>
+        </div>
+        <p class="timeline-note">
+            Hệ thống sẽ quay trở về website trong giây lát
+        </p>
+    </div>
+    <div class="contact">
+        <p>
+            Trong quá trình thực hiện thanh toán nếu có vấn đề xảy ra
+            bạn vui lòng liên hệ:
+        </p>
+        <p>Điện thoại: <span class="text-red">19006006</span></p>
+        <p>Email: <span class="text-red">hotro@Jetpay.com</span></p>
+        <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
+    </div>
+</div>
+<script src="../lib/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let number = $('.number').text();
+        let intervalId = setInterval(function () {
+            number--;
+            $('.number').html(number);
+            if (number == 0) {
+                clearInterval(intervalId);
+                    window.location = window.location.protocol +
+                        '//' + window.location.hostname + ':5001' + `/home/confirm?order=1852925295&payment_processing=0`;
+            }
+        }, 1000);
+    });
+</script>
+

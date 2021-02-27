@@ -1,0 +1,64 @@
+﻿body {
+    margin: 0px;
+   font-family: Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 13px;
+}
+
+a {
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url();
+}
+
+::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+    z-index: 1231232123421;
+}
+
+::-webkit-scrollbar-track {
+    width: 6px;
+    background-color: #bbb;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #808080;
+    border-radius: 8px;
+}
+
+@font-face {
+    font-family: 'GoogleSans-Black';
+    src: url('/content/font/GoogleSans-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-BlackItalic';
+    src: url('/content/font/GoogleSans-BlackItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Bold';
+    src: url('/content/font/GoogleSans-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-BoldItalic';
+    src: url('/content/font/GoogleSans-BoldItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Light';
+    src: url('/content/font/GoogleSans-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Medium';
+    src: url('/content/font/GoogleSans-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('/content/font/GoogleSans-Regular.otf') format('opentype');
+}

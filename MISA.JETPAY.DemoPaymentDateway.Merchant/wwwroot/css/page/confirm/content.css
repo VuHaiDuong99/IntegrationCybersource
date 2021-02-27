@@ -1,0 +1,229 @@
+.content {
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 100%;
+    background-color: #f1f1f1;
+}
+
+
+    .content .header-con {
+        height: 60px;
+        width: 70%;
+        background-color: #ffffff;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .content .header-con .title h3, p {
+            margin: 0;
+            padding: 4px;
+        }
+
+    .content .order {
+        height: 280px;
+        width: 70%;
+        background-color: #ffffff;
+        margin: 0 100px 12px 100px;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .content .order .order-left {
+            position: relative;
+            width: calc(100% - 25%);
+            border-right: 1px solid #c7c7cd;
+            float: left;
+        }
+
+            .content .order .order-left .row-1 {
+                height: 60px;
+                left: 10px;
+                border-bottom: 1px solid #c7c7cd;
+            }
+
+                .content .order .order-left .row-1 .row-1-icon {
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 23px;
+                    background-image: url('/content/img/shop.jpg');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    border: 2px solid #65a0e6;
+                    background-position: center;
+                    margin: 8px 0 0 20px;
+                    float: left;
+                }
+
+                .content .order .order-left .row-1 .row-1-tilte {
+                    font-weight: bold;
+                    font-size: 16px;
+                    padding: 10px 0 0 80px;
+                }
+
+            .content .order .order-left .row-2 {
+                height: 60px;
+            }
+
+                .content .order .order-left .row-2 .title {
+                    padding: 20px;
+                }
+
+            .content .order .order-left .row-3 {
+                height: 100px;
+            }
+
+                .content .order .order-left .row-3 .row-3-col-1 {
+                    height: 100px;
+                    width: 30%;
+                    border-right: 2px dashed #c7c7cd;
+                    float: left;
+                }
+
+                .content .order .order-left .row-3 .row-3-img {
+                    height: 60px;
+                    width: 60px;
+                    margin-left: 20px;
+                    padding-top: 35px;
+                    background-image: url('../content/img/SP.jpg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    float: left;
+                }
+
+                .content .order .order-left .row-3 .row-3-img-2 {
+                    height: 60px;
+                    width: 60px;
+                    margin-left: 20px;
+                    padding-top: 35px;
+                    background-image: url('../content/img/op.png');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    float: left;
+                }
+
+                .content .order .order-left .row-3 .row-3-title {
+                    font-weight: bold;
+                    font-size: 12px;
+                    padding-top: 35px;
+                    padding-left: 100px;
+                }
+
+                .content .order .order-left .row-3 .row-3-col-2 {
+                    height: 100px;
+                    width: 30%;
+                    border-right: 2px dashed #c7c7cd;
+                    float: left;
+                }
+
+                .content .order .order-left .row-3 .row-3-col-3 {
+                    height: 100px;
+                    width: 14%;
+                    border-right: 2px dashed #c7c7cd;
+                    float: left;
+                }
+
+                .content .order .order-left .row-3 .row-3-col-4 {
+                    height: 100px;
+                    width: 12%;
+                    border-right: 2px dashed #c7c7cd;
+                    float: left;
+                }
+
+                .content .order .order-left .row-3 .row-3-col-5 {
+                    position: relative;
+                    height: 100px;
+                    width: 12%;
+                    float: left;
+                }
+
+                    .content .order .order-left .row-3 .row-3-col-5 button {
+                        border: none;
+                        background: none;
+                        outline: none;
+                        color: #a5beec;
+                        padding-left: 50px;
+                        padding-top: 35px;
+                        float: left;
+                    }
+
+                    .content .order .order-left .row-3 .row-3-col-5 .icon-del {
+                        height: 30px;
+                        width: 30px;
+                        padding-left: 180px;
+                        padding-top: 45px;
+                        background-image: url('../content/img/del.svg');
+                        background-size: inherit;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+
+.text {
+    padding-top: 35px;
+    text-align: center;
+}
+
+
+.content .order .order-left .row-4 {
+    height: 59px;
+}
+
+    .content .order .order-left .row-4 .title {
+        padding: 20px;
+    }
+
+.content .order .order-right {
+    position: relative;
+    top: 0;
+    left: calc(100% - 25%);
+    height: 280px;
+    width: calc(100% - 77%);
+    margin-right: 0;
+}
+
+    .content .order .order-right .row-1 {
+        position: absolute;
+        top: 0;
+        height: 30px;
+        width: 100%;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 10px 10px 0 10px;
+        border-bottom: 1px solid #c7c7cd;
+    }
+
+
+    .content .order .order-right .row-2 {
+        position: absolute;
+        height: 240px;
+        width: 100%;
+    }
+
+        .content .order .order-right .row-2 .prince {
+            position: relative;
+            top: 200px;
+            right: 20px;
+            width: 60%;
+            height: 40px;
+            font-size: 16px;
+        }
+
+        .content .order .order-right .row-2 button {
+            position: relative;
+            top: 180px;
+            left: 0;
+            height: 36px;
+            width: 100%;
+            margin: 15px 0 0 15px;
+            background-color: #e5101d;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            font-weight: bold;
+            color: white;
+        }

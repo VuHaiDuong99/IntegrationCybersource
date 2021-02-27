@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MISA.JETPAY.DemoPaymentDateway.Merchant</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />*@
+    <link href="~/css/page/checkout/checkout.css" rel="stylesheet" />
+    <link href="~/css/page/checkout/main.css" rel="stylesheet" />
+    <link href="~/css/page/checkout/orderSuccessful.css" rel="stylesheet" />
+    <link href="~/css/page/checkout/payment.css" rel="stylesheet" />
+    <link href="~/lib/icon/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" />
+    <link href="~/css/page/checkout/orderSuccessful.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery-3.5.1.min.js"></script>
+    <script src="~/js/page/checkout.js"></script>
+    <script src="~/js/page/payment.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

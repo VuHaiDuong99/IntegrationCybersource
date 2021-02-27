@@ -1,0 +1,194 @@
+﻿.main {
+    width: 100%;
+}
+
+.g-row {
+    height: 20px;
+}
+
+.g-line {
+    height: 14px;
+    background-image: url('/content/img/bg_header.gif');
+}
+
+.align-right {
+    width: 100%;
+    text-align: right;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.copygray {
+    color: #CCCCCC;
+}
+
+
+.g-note {
+    padding: 0 40px 0 50px;
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #333333;
+}
+
+.g-same-row {
+    display: flex;
+    margin-top: 3px;
+    align-items: center;
+    font-family: Verdana, Arial, Tahoma;
+    color: #333333;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.g-lable {
+    width: 150px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.error-message {
+    display:flex;
+    justify-content:center;
+    width:378px;
+    margin-top:5px;
+    font-family: Tahoma;
+    color: #C63635;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.g-center {
+    width: 800px;
+    margin: auto;
+    border: 1px solid gray;
+}
+
+    .g-center .g-content {
+        width: 796px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+.g-banner {
+    width: 795px;
+    height: 81px;
+    background-image: url('/content/img/banner.png');
+}
+
+.g-footer {
+    height: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: #C0E1F2;
+}
+
+    .g-footer .footer-center {
+        color: #333333;
+        font-family: Verdana,Arial,Tahoma;
+        font-size: 11px;
+        margin-left: 261px;
+    }
+
+    .g-footer .footer-right {
+        margin-top: 4px;
+    }
+
+.order {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .order .order-left {
+        width: 222px;
+        background-color: #ffffff;
+    }
+
+        .order .order-left .g-logo {
+            height: 100px;
+            background-repeat: no-repeat;
+            margin-left: 16px;
+            margin-right:16px;
+            margin-top: 35px;
+            background-size:contain;
+            background-image: url('https://jetpay.vn/wp-content/uploads/2021/01/logo.svg');
+        }
+
+    .order .order-center {
+        width: 366px;
+    }
+
+        .order .order-center .order-info {
+            background-color: #E1EDF9;
+            padding-top: 10px;
+            padding-bottom: 15px;
+            width: 340px;
+            border-color: #cccccc;
+            color: #333333;
+            font-family: Tahoma;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+    .order .order-right {
+        width: 215px;
+    }
+
+.payment-method {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+}
+
+    .payment-method .method-left {
+        width: 222px;
+    }
+
+    .payment-method .method-center {
+        width: 366px;
+    }
+
+        .payment-method .method-center .g-lable {
+            margin-left: 15px;
+        }
+
+        .payment-method .method-center .method-info {
+            width: 340px;
+            border-color: #cccccc;
+            color: #333333;
+            font-family: Tahoma;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .payment-method .method-center .method-input .g-same-row {
+            padding-top: 3px;
+        }
+
+    .payment-method .method-right {
+        width: 215px;
+    }
+
+        .payment-method .method-right .method-logo {
+            padding-top: 20px;
+            padding-left: 15px;
+            padding-right: 22px;
+        }
+
+.logo-desc {
+    font-size: 11px;
+    font-family: Tahoma;
+    color: #333333;
+}
+
+
+.g-scroll {
+    margin-top: 5px;
+    display: flex;
+    background-image: url('/content/img/bg_bank.gif');
+}
