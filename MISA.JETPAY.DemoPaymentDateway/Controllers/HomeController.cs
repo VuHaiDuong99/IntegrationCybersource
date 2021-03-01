@@ -32,12 +32,17 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
         {
             return View();
         }
+
+      
+        public IActionResult cybersource()
+        {
+            return View();
+        }
         public IActionResult test()
         
         {
             string url = "https://apitest.cybersource.com/pts/v2/payments";
 
-            string JsonObj = System.IO.File.ReadAllText("C:/Users/vhduong/Desktop/MISA.JETPAY.DemoPaymentDateway/MISA.JETPAY.DemoPaymentDateway/json.txt");
             string SecretKey = "dlPkKIsuwoLnh8UobuS/mlAUwMIMUANS0PD1D8zMlQA=";
             string KeyId = "079ded53-cd32-400e-83ed-948bfa0d9811";
             string merchantId = "test_gateway";
