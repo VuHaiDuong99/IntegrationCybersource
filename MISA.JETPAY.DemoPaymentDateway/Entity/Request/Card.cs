@@ -8,7 +8,7 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
 {
     public class Card
     {
-
+        public Card() { }
         public Card(string number, string expirationMonth, string expirationYear)
         {
             Number = number;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.JETPAY.DemoPaymentGateway.Entity.Response;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -8,21 +9,10 @@ namespace MISA.JETPAY.DemoPaymentGateway.ServiceDemo
 {
     public class BaseHttp
     {
-        public static void BaseHttpRestfull(string url, string method, string JsonObj, Dictionary<string, string> header)
+        public static ServiceResult BaseHttpRestfull(string url, string method, string JsonObj, Dictionary<string, string> header)
         {
-            /* using var httpClient = new HttpClient();
-             foreach (var item in header)
-             {
-                 httpClient.DefaultRequestHeaders.Add(item.Key, item.Value);
-             }
-
-             HttpResponseMessage response =  httpClient.PostAsync(url,JsonObj).Result;*/
-
-
-
-
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://apitest.cybersource.com/pts/v2/payments");
+            var serviceResult = new ServiceResult();
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.Method = "POST";
             foreach (var item in header)
             {
@@ -30,7 +20,7 @@ namespace MISA.JETPAY.DemoPaymentGateway.ServiceDemo
             }
             httpWebRequest.ContentType = "application/json";
             var httpResponse = new HttpWebResponse();
-            string res = "";
+            
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(JsonObj);
@@ -44,16 +34,19 @@ namespace MISA.JETPAY.DemoPaymentGateway.ServiceDemo
 
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    res = streamReader.ReadToEnd();
+                    serviceResult.HttpResponse = "200";
+                    //serviceResult.HttpResponse = httpResponse.StatusCode.ToString();
+                    serviceResult.Data = streamReader.ReadToEnd();
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
-                Console.WriteLine(httpResponse.ToString());
+                //serviceResult.HttpResponse = httpResponse.StatusCode.ToString();
+                serviceResult.Messenger = e.ToString();
+                serviceResult.HttpResponse = "100";
             }
 
-            Console.Write(res);
+            return serviceResult;
 
 
         }

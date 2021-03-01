@@ -215,7 +215,8 @@ class GatewayJS {
      * CreatedBy: NDBINH (22/02/2021)
      * */
     initInforOrder() {
-        var tongTien = GetParameterValues('tongtien');
+        var totalAmount = GetParameterValues('totalAmount');
+        var currency = GetParameterValues('currency');
         function GetParameterValues(param) {
             var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i = 0; i < url.length; i++) {
@@ -225,7 +226,13 @@ class GatewayJS {
                 }
             }
         }
-        $('#txtGiaTriDonHang').val(tongTien + ' VND');
+
+        
+        console.log(totalAmount);
+        console.log(currency);
+
+        $('#txtGiaTriDonHang').val(totalAmount + " " + currency);
+
     }
 
     /**

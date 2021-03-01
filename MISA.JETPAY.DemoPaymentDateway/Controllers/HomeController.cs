@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OData.Edm;
 using MISA.JETPAY.DemoPaymentDateway.Models;
 using MISA.JETPAY.DemoPaymentGateway.Entity.Request;
+using MISA.JETPAY.DemoPaymentGateway.Entity.Response;
 using Newtonsoft.Json;
 
 using static MISA.JETPAY.DemoPaymentGateway.Models.ProcessPayment;
@@ -30,26 +31,21 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
 
         public IActionResult gateway()
         {
+            
             return View();
         }
 
-      
-        public IActionResult cybersource()
-        {
-            return View();
-        }
-        public IActionResult test()
-        
+        [HttpPost]
+        public IActionResult Result(Card card)
         {
             string url = "https://apitest.cybersource.com/pts/v2/payments";
-
             string SecretKey = "dlPkKIsuwoLnh8UobuS/mlAUwMIMUANS0PD1D8zMlQA=";
             string KeyId = "079ded53-cd32-400e-83ed-948bfa0d9811";
             string merchantId = "test_gateway";
             var clientReferenceInformation = new ClientReferenceInformation("TC50171_3");
             var paymentInformation = new PaymentInformation()
             {
-                Card = new Card("4111111111111111", "12", "2031")
+                Card = new Card(card.Number, card.ExpirationMonth, card.ExpirationYear)
             };
             var orderInformation = new OrderInformation()
             {
@@ -63,36 +59,39 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
                 PaymentInformation = paymentInformation,
                 OrderInformation = orderInformation
             };
-
             var objReqPaymentJson = JsonConvert.SerializeObject(objReqPayment);
-            //var httpContent = new StringContent(objReqPaymentJson, Encoding.UTF8, "application/json");
-            /* var buffer = System.Text.Encoding.UTF8.GetBytes(objReqPaymentJson);
-             var byteContent = new ByteArrayContent(buffer);*/
-
-            
             var digest = GenerateDigest(objReqPaymentJson);
-          
-            var httpContent = new StringContent(objReqPaymentJson, Encoding.UTF8, "application/json");
-
             var signatureParm = "host: apitest.cybersource.com\n(request-target): post /pts/v2/payments/\ndigest: " + digest + "\nv-c-merchant-id: " + merchantId;
             var signatureHash = GenerateSignatureFromParams(signatureParm, SecretKey);
             Console.WriteLine(signatureHash);
             var date = DateTime.Now.ToString("ddd, dd MMM yyy HH':'mm':'ss 'GMT'");
-
-
             Dictionary<string, string> header = new Dictionary<string, string>();
-            //   header.Add("host", "apitest.cybersource.com");
-            //var signatureLocal = "Rbbrh0llAlguhXG4xMHAgnCIk+JbHK/g3dVEf5WNeno=";
             header.Add("v-c-merchant-id", merchantId);
             header.Add("host", "apitest.cybersource.com");
             header.Add("v-c-date", date);
             header.Add("Digest", digest);
             header.Add("Signature", "keyid=\"" + KeyId + "\", algorithm=\"HmacSHA256\", headers=\"host (request-target) digest v-c-merchant-id\", signature=\"" + "Rbbrh0llAlguhXG4xMHAgnCIk+JbHK/g3dVEf5WNeno=" + "\"");
             header.Add("ContentType", "application/json");
+            var serviceResult = new ServiceResult();
+            serviceResult =  MISA.JETPAY.DemoPaymentGateway.ServiceDemo.BaseHttp.BaseHttpRestfull(url, "POST", objReqPaymentJson, header);
+            var mes = "hihih";
+            if(serviceResult.HttpResponse == "200")
+            {
+                return View("Result");
+            }
+            else
+            {
+                mes = "Thông tin nhập sai! Vui lòng nhập lại!";
+                ViewBag.mess = mes;
+                return View("gateway");
+            }
            
-            MISA.JETPAY.DemoPaymentGateway.ServiceDemo.BaseHttp.BaseHttpRestfull(url, "POST", objReqPaymentJson, header);
-
-            return Ok();
+        }
+      
+        public IActionResult cybersource()
+        {
+            
+            return View();
         }
         public IActionResult Privacy()
         {

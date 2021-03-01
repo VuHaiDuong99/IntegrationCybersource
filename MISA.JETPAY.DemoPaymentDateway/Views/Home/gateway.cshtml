@@ -35,6 +35,7 @@
                             <div class="g-same-row">
                                 <div class="g-lable">Nhà cung cấp dịch vụ ::</div>
                                 <div class="form-input"><input type="text" name="" readonly value="CTY TNHH VI FPT" id="txtNhaCungCap" /></div>
+                               
                             </div>
                         </fieldset>
                     </div>
@@ -52,49 +53,56 @@
                         <fieldset class="method-info">
                             <legend>Chọn phương thức thanh toán</legend>
                             <div class="g-same-row">
-                                <input type="radio" disabled />
-                                <div class="copygray">Thẻ quốc tế <span style="margin-left:51px; margin-right:3px;">::</span></div>
+                                <input type="radio"  checked/>
+                                <div >Cybersource <span style="margin-left:51px; margin-right:3px;">::</span></div>
                                 <img src="/content/img/visa_master_list2.gif" />
                             </div>
                             <div class="g-same-row">
-                                <input type="radio" checked />
-                                <p>Thẻ ATM, tài khoản mở tại ngân hàng Việt Nam</p>
+                                <input type="radio"  disabled />
+                                <p>Napas</p>
                             </div>
                         </fieldset>
                         <div class="method-input">
                             <div class="g-same-row">
-                                <div class="g-lable">Chọn ngân hàng ::</div>
+                                @*<div class="g-lable">Chọn ngân hàng ::</div>
                                 <div class="form-input">
                                     <select name="selectBank" id="SelectBank">
                                         <option value="D1133">VPBank</option>
                                     </select>
+                                </div>*@
+                            </div>
+                            <div  style="color:red;text-align:center">@ViewBag.mess</div>
+                            <form action="/home/result" method="post">
+                                <div class="g-same-row">
+                                    <div class="g-lable">Nhập tên chủ thẻ ::</div>
+                                    <div class="form-input"><input type="text" name="Tên chủ thẻ" id="txtTenChuThe" required /></div>
                                 </div>
-                            </div>
-                            <div class="g-same-row">
-                                <div class="g-lable">Nhập tên chủ thẻ ::</div>
-                                <div class="form-input"><input type="text" name="Tên chủ thẻ" id="txtTenChuThe" required /></div>
-                            </div>
-                            <div class="g-same-row">
-                                <div class="g-lable">Nhập số thẻ ::</div>
-                                <div class="form-input"><input type="text" name="Số thẻ" id="txtSoThe" required /></div>
-                            </div>
-                            <div class="g-same-row">
-                                <div class="g-lable">Nhập hiệu lực thẻ ::</div>
-                                <div class="form-input">
-                                    <select class="cardExpDate" style="width:50px; background-color:#ffffff" name="CardMonth" id="cardMonth"></select>
-                                    (mm)
+                                <div class="g-same-row">
+                                    <div class="g-lable">Nhập số thẻ ::</div>
+                                    <div class="form-input"><input type="text" name="Number" id="txtSoThe" required /></div>
                                 </div>
-                                <div class="form-input">
-                                    <select class="cardExpDate" style="width:50px; background-color:#ffffff" name="CardYear" id="cardYear"></select>
-                                    (yy)
+                                <div class="g-same-row">
+                                    <div class="g-lable">Nhập hiệu lực thẻ ::</div>
+                                    <div class="form-input">
+                                        <input type="text" name="ExpirationMonth" id="txtSoThe" required style="width: 40px" />
+                                        @*<select class="cardExpDate" style="width:50px; background-color:#ffffff" name="ExpirationMonth" id="cardMonth"></select>*@
+                                        (mm)
+                                    </div>
+                                    <div class="form-input">
+                                        <input type="text" name="ExpirationYear" id="txtSoThe" required style="width: 40px; margin-left: 8px;" />
+                                       @* <select class="cardExpDate" style="width:50px; background-color:#ffffff" name="ExpirationYear" id="cardYear"></select>*@
+                                        (yy)
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="g-row"></div>
-                        <div class="g-same-row group-button">
-                            <div class="g-lable"></div>
-                            <button id="g-btn-cancel" title="Hủy">Hủy</button>
-                            <button id="g-btn-pay" title="Thanh toán"><a style="text-decoration:none; color:#084067;">Thanh toán</a></button>
+                                <div class="g-row"></div>
+                                <div class="g-same-row group-button">
+                                    <div class="g-lable"></div>
+                                    <button id="g-btn-cancel" title="Hủy">Hủy</button>
+                                    <input type="submit" value="Thanh toán " />
+                                    @*  <button id="g-btn-pay" title="Thanh toán"><a style="text-decoration:none; color:#084067;">Thanh toán</a></button>*@
+                                </div>
+                            </form>
+
                         </div>
                         <div class="g-same-row">
                             <div class="align-right tutorial-security"><a style="color:blue;" href="#">Hướng dẫn giao dịch thanh toán an toàn</a></div>
@@ -103,8 +111,8 @@
                     </div>
                     <div class="method-right">
                         <div class="method-logo">
-                            <img style="padding-bottom:10px;" src="/content/img/VPB_Large.jpg" />
-                            <img id="imgCardLogo" src="/content/img/default.jpg" />
+                           
+                            
                             <div class="logo-desc"></div>
                         </div>
                     </div>
@@ -157,7 +165,7 @@
         <div class="g-row"></div>
     </div>
     <script src="/lib/jquery-3.5.1.min.js"></script>
-    <script src="/js/gateway.js"></script>
+    <script src="~/js/gateway.js"></script>
     <script src="/js/common/common.js"></script>
 </body>
 </html>
