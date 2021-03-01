@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
 {
-    public class Cart
+    public class Card
     {
 
-        public Cart(string number, string expirationMonth, string expirationYear)
+        public Card(string number, string expirationMonth, string expirationYear)
         {
             Number = number;
             ExpirationMonth = expirationMonth;

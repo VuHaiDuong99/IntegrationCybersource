@@ -9,8 +9,8 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
     public class PaymentInformation
     {
 
-        [JsonProperty("cart")]
-        public Cart Cart { get; set; }
+        [JsonProperty("card")]
+        public Card Card { get; set; }
         
     }
 }

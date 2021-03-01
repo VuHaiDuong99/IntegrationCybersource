@@ -12,8 +12,8 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
         /// 
         /// </summary>
 
-        [JsonProperty("fisrtName")]
-        public string FisrtName { get; set; }
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -21,8 +21,8 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
         public string LastName { get; set; }
         [JsonProperty("address1")]
         public string Address1 { get; set; }
-        [JsonProperty("location")]
-        public string Location { get; set; }
+        [JsonProperty("locality")]
+        public string Locality { get; set; }
         [JsonProperty("administrativeArea")]
         public string AdministrativeArea { get; set; }
         [JsonProperty("postalCode")]
@@ -49,10 +49,10 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
         /// <param name="phoneNumber"></param>
         public BillTo(string firstName, string lastName, string add1, string location, string adminArea, string postCode, string country, string email, string phoneNumber)
         {
-            FisrtName = firstName;
+            FirstName = firstName;
             LastName = lastName;
             Address1 = add1;
-            Location = location;
+            Locality = location;
             AdministrativeArea = adminArea;
             PostalCode = postCode;
             Country = country;

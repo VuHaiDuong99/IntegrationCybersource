@@ -1,56 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace MISA.JETPAY.DemoPaymentGateway.ServiceDemo
 {
     public class BaseHttp
     {
-        public static void BaseHttpRestfull(string url, string method, StringContent objData, Dictionary<string, string> header)
+        public static void BaseHttpRestfull(string url, string method, string JsonObj, Dictionary<string, string> header)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(url);
+            /* using var httpClient = new HttpClient();
+             foreach (var item in header)
+             {
+                 httpClient.DefaultRequestHeaders.Add(item.Key, item.Value);
+             }
+
+             HttpResponseMessage response =  httpClient.PostAsync(url,JsonObj).Result;*/
 
 
-            client.DefaultRequestHeaders.Accept.Clear();
 
+
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://apitest.cybersource.com/pts/v2/payments");
+            httpWebRequest.Method = "POST";
             foreach (var item in header)
             {
-                client.DefaultRequestHeaders.Add(item.Key, item.Value);
+                httpWebRequest.Headers.Add(item.Key, item.Value);
             }
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // Add an Accept header for JSON format.
-            /*client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));*/
-            /* foreach (var item in header)
-             {
-                 client.DefaultRequestHeaders.Add(item.Key, item.Value);
-             }*/
-            HttpResponseMessage response = new HttpResponseMessage();
-
-            if (method.ToUpper().Equals("POST"))
-                response = client.PostAsync(url,  objData).Result;
-            else
-                response = client.GetAsync("").Result;
-            // List data response.
-            if (response.IsSuccessStatusCode)
+            httpWebRequest.ContentType = "application/json";
+            var httpResponse = new HttpWebResponse();
+            string res = "";
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                // Parse the response body.
-                var dataObjects = response.Content.ReadAsStringAsync().Result;
-                foreach (var d in dataObjects)
+                streamWriter.Write(JsonObj);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            try
+            {
+                httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    Console.WriteLine("{0}", d);
+                    res = streamReader.ReadToEnd();
                 }
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                Console.WriteLine(e.ToString());
+                Console.WriteLine(httpResponse.ToString());
             }
-            client.Dispose();
+
+            Console.Write(res);
+
+
         }
     }
 }

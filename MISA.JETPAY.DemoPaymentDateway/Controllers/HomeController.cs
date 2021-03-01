@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,6 +14,7 @@ using Microsoft.OData.Edm;
 using MISA.JETPAY.DemoPaymentDateway.Models;
 using MISA.JETPAY.DemoPaymentGateway.Entity.Request;
 using Newtonsoft.Json;
+
 using static MISA.JETPAY.DemoPaymentGateway.Models.ProcessPayment;
 
 namespace MISA.JETPAY.DemoPaymentDateway.Controllers
@@ -32,13 +35,16 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
         public IActionResult test()
         
         {
-            string SecretKey = "+JjOOTqdIkMptZ460yaqzYtLgIeLyOEqbqzDJGL2I1g=";
-            string KeyId = "7a3712c7 - 4688 - 430c - ad9a - 3101cf9ced5a";
-            string MerchantId = "test_jetpay";
+            string url = "https://apitest.cybersource.com/pts/v2/payments";
+
+            string JsonObj = System.IO.File.ReadAllText("C:/Users/vhduong/Desktop/MISA.JETPAY.DemoPaymentDateway/MISA.JETPAY.DemoPaymentDateway/json.txt");
+            string SecretKey = "dlPkKIsuwoLnh8UobuS/mlAUwMIMUANS0PD1D8zMlQA=";
+            string KeyId = "079ded53-cd32-400e-83ed-948bfa0d9811";
+            string merchantId = "test_gateway";
             var clientReferenceInformation = new ClientReferenceInformation("TC50171_3");
             var paymentInformation = new PaymentInformation()
             {
-                Cart = new Cart("4111111111111111", "12", "2031")
+                Card = new Card("4111111111111111", "12", "2031")
             };
             var orderInformation = new OrderInformation()
             {
@@ -54,44 +60,34 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
             };
 
             var objReqPaymentJson = JsonConvert.SerializeObject(objReqPayment);
+            //var httpContent = new StringContent(objReqPaymentJson, Encoding.UTF8, "application/json");
+            /* var buffer = System.Text.Encoding.UTF8.GetBytes(objReqPaymentJson);
+             var byteContent = new ByteArrayContent(buffer);*/
 
-            /*var buffer = System.Text.Encoding.UTF8.GetBytes(objReqPaymentJson);
-            var byteContent = new ByteArrayContent(buffer);*/
-            StringContent httpContent = new StringContent(objReqPaymentJson, Encoding.UTF8, "application/json");
-            // đường dẫn url
-            string url = "https://apitest.cybersource.com/pts/v2/payments";
-            // date
-           // var date = new DateTime(DateTime.Now.).toUTCString();
             
-            // sinh digest
             var digest = GenerateDigest(objReqPaymentJson);
-            // mã bí mật
-            //var secretKey = "+JjOOTqdIkMptZ460yaqzYtLgIeLyOEqbqzDJGL2I1g=";
-            string signatureParams = 
-                "host: apitest.cybersource.com \n"+
-                "date: Thu, 18 Jul 2019 00:18:03 GMT\n" +
-                "(request - target): post /pts/v2/payments/ \n" +
-                $"digest:{digest}\n" +
-                "v-c-merchant-id: test_jetpay";
-            // sinh mã Signature
-            var generateSignatureFromParams = GenerateSignatureFromParams(signatureParams, SecretKey);
-
-            var Signature = 'keyid="7a3712c7 - 4688 - 430c - ad9a - 3101cf9ced5a", algorithm="HmacSHA256", headers="host date(request-target) v - c - merchant - id", signature="lAJZEekdnpG5OrhJqcHA + xvH0kiX3CgoJsT1yKMcqoQ = "';
-            // giá trị header
-            Dictionary<string, string> header = new Dictionary<string, string>();
-            header.Add("host", "apitest.cybersource.com");
-            header.Add("v-c-merchant-id", "test_jetpay");
-            header.Add("Date", "");
-            header.Add("Content-Type", "");
-            header.Add("Digest", digest);
-            header.Add("Signature", signatureParams);
-
-            MISA.JETPAY.DemoPaymentGateway.ServiceDemo.BaseHttp.BaseHttpRestfull(url,"POST", httpContent, header);
-
           
+            var httpContent = new StringContent(objReqPaymentJson, Encoding.UTF8, "application/json");
+
+            var signatureParm = "host: apitest.cybersource.com\n(request-target): post /pts/v2/payments/\ndigest: " + digest + "\nv-c-merchant-id: " + merchantId;
+            var signatureHash = GenerateSignatureFromParams(signatureParm, SecretKey);
+            Console.WriteLine(signatureHash);
+            var date = DateTime.Now.ToString("ddd, dd MMM yyy HH':'mm':'ss 'GMT'");
 
 
-            return test();
+            Dictionary<string, string> header = new Dictionary<string, string>();
+            //   header.Add("host", "apitest.cybersource.com");
+            //var signatureLocal = "Rbbrh0llAlguhXG4xMHAgnCIk+JbHK/g3dVEf5WNeno=";
+            header.Add("v-c-merchant-id", merchantId);
+            header.Add("host", "apitest.cybersource.com");
+            header.Add("v-c-date", date);
+            header.Add("Digest", digest);
+            header.Add("Signature", "keyid=\"" + KeyId + "\", algorithm=\"HmacSHA256\", headers=\"host (request-target) digest v-c-merchant-id\", signature=\"" + "Rbbrh0llAlguhXG4xMHAgnCIk+JbHK/g3dVEf5WNeno=" + "\"");
+            header.Add("ContentType", "application/json");
+           
+            MISA.JETPAY.DemoPaymentGateway.ServiceDemo.BaseHttp.BaseHttpRestfull(url, "POST", objReqPaymentJson, header);
+
+            return Ok();
         }
         public IActionResult Privacy()
         {
@@ -112,14 +108,14 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
         /// </summary>
         /// <param name="payload"> String body dưới dạng json request</param>
         /// <returns></returns>
-        private static string GenerateDigest(string payload)
+        public static string GenerateDigest(string bodyText)
         {
             var digest = "";
-            
+
             using (var sha256hash = SHA256.Create())
             {
                 byte[] payloadBytes = sha256hash
-                    .ComputeHash(Encoding.UTF8.GetBytes(payload));
+                    .ComputeHash(Encoding.UTF8.GetBytes(bodyText));
                 digest = Convert.ToBase64String(payloadBytes);
                 digest = "SHA-256=" + digest;
             }
@@ -132,7 +128,7 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
         /// <param name="signatureParams"></param>
         /// <param name="secretKey"></param>
         /// <returns></returns>
-        private static string GenerateSignatureFromParams(string signatureParams, string secretKey)
+        public static string GenerateSignatureFromParams(string signatureParams, string secretKey)
         {
             var sigBytes = Encoding.UTF8.GetBytes(signatureParams);
             var decodedSecret = Convert.FromBase64String(secretKey);
@@ -140,7 +136,7 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
             var messageHash = hmacSha256.ComputeHash(sigBytes);
             return Convert.ToBase64String(messageHash);
         }
-       
+
         #endregion
 
     }
