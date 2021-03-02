@@ -8,6 +8,7 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
 {
     public class Card
     {
+        #region Hàm khởi tạo
         public Card() { }
         public Card(string number, string expirationMonth, string expirationYear)
         {
@@ -15,6 +16,7 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
             ExpirationMonth = expirationMonth;
             ExpirationYear = expirationYear;
         }
+        #endregion
         /// <summary>
         /// Số thẻ
         /// </summary>

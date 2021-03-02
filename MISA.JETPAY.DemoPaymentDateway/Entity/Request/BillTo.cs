@@ -9,18 +9,22 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
     public class BillTo
     {
         /// <summary>
-        /// 
+        /// Tên của khách hàng
         /// </summary>
 
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
         /// <summary>
-        /// 
+        /// Họ của khách hàng
         /// </summary>
         [JsonProperty("lastName")]
         public string LastName { get; set; }
+        /// <summary>
+        /// Địa chỉ
+        /// </summary>
         [JsonProperty("address1")]
         public string Address1 { get; set; }
+
         [JsonProperty("locality")]
         public string Locality { get; set; }
         [JsonProperty("administrativeArea")]
@@ -35,6 +39,10 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 
+
+        public BillTo() { }
+
+        #region Hàm khởi tạo
         /// <summary>
         /// 
         /// </summary>
@@ -59,5 +67,6 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
             Email = email;
             PhoneNumber = phoneNumber;
         }
+        #endregion
     }
 }

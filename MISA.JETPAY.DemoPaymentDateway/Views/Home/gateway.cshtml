@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model MISA.JETPAY.DemoPaymentGateway.Entity.Request.AmountDetail
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,6 +11,8 @@
     <script src="/lib/crawler.js"></script>
 </head>
 <body>
+    
+   
     <div class="main">
         <div class="g-row"></div>
         <div class="g-center">
@@ -35,7 +38,7 @@
                             <div class="g-same-row">
                                 <div class="g-lable">Nhà cung cấp dịch vụ ::</div>
                                 <div class="form-input"><input type="text" name="" readonly value="CTY TNHH VI FPT" id="txtNhaCungCap" /></div>
-                               
+
                             </div>
                         </fieldset>
                     </div>
@@ -53,30 +56,30 @@
                         <fieldset class="method-info">
                             <legend>Chọn phương thức thanh toán</legend>
                             <div class="g-same-row">
-                                <input type="radio"  checked/>
-                                <div >Cybersource <span style="margin-left:51px; margin-right:3px;">::</span></div>
+                                <input type="radio" checked />
+                                <div>Cybersource <span style="margin-left:51px; margin-right:3px;">::</span></div>
                                 <img src="/content/img/visa_master_list2.gif" />
                             </div>
                             <div class="g-same-row">
-                                <input type="radio"  disabled />
+                                <input type="radio" disabled />
                                 <p>Napas</p>
                             </div>
                         </fieldset>
                         <div class="method-input">
                             <div class="g-same-row">
                                 @*<div class="g-lable">Chọn ngân hàng ::</div>
-                                <div class="form-input">
-                                    <select name="selectBank" id="SelectBank">
-                                        <option value="D1133">VPBank</option>
-                                    </select>
-                                </div>*@
+                                    <div class="form-input">
+                                        <select name="selectBank" id="SelectBank">
+                                            <option value="D1133">VPBank</option>
+                                        </select>
+                                    </div>*@
                             </div>
-                            <div  style="color:red;text-align:center">@ViewBag.mess</div>
+                            <div style="color:red;text-align:center">@ViewBag.mess</div>
                             <form action="/home/result" method="post">
-                                <div class="g-same-row">
+                                @*<div class="g-same-row">
                                     <div class="g-lable">Nhập tên chủ thẻ ::</div>
                                     <div class="form-input"><input type="text" name="Tên chủ thẻ" id="txtTenChuThe" required /></div>
-                                </div>
+                                </div>*@
                                 <div class="g-same-row">
                                     <div class="g-lable">Nhập số thẻ ::</div>
                                     <div class="form-input"><input type="text" name="Number" id="txtSoThe" required /></div>
@@ -90,7 +93,7 @@
                                     </div>
                                     <div class="form-input">
                                         <input type="text" name="ExpirationYear" id="txtSoThe" required style="width: 40px; margin-left: 8px;" />
-                                       @* <select class="cardExpDate" style="width:50px; background-color:#ffffff" name="ExpirationYear" id="cardYear"></select>*@
+                                        @* <select class="cardExpDate" style="width:50px; background-color:#ffffff" name="ExpirationYear" id="cardYear"></select>*@
                                         (yy)
                                     </div>
                                 </div>
@@ -100,6 +103,12 @@
                                     <button id="g-btn-cancel" title="Hủy">Hủy</button>
                                     <input type="submit" value="Thanh toán " />
                                     @*  <button id="g-btn-pay" title="Thanh toán"><a style="text-decoration:none; color:#084067;">Thanh toán</a></button>*@
+                                </div>
+                                <div style="display:none">
+                                    <input id="merchantId" name="merchantId" />
+                                    <input id="code" name="Code" />
+                                    <input id="totalAmount" name="TotalAmount" />
+                                    <input id="currency" name="Currency" />
                                 </div>
                             </form>
 
@@ -111,8 +120,8 @@
                     </div>
                     <div class="method-right">
                         <div class="method-logo">
-                           
-                            
+
+
                             <div class="logo-desc"></div>
                         </div>
                     </div>

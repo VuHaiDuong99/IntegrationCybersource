@@ -56,7 +56,7 @@ class CheckOutJS {
         // $('.btn-pay button').attr('href', `home/gateway?tongtien=${tongtien}&bank=${nameBank}`);
 
         window.location = window.location.protocol +
-            '//' + window.location.hostname + ':44322' + `/home/gateway?merchantId="test_gateway"&code="TC50171_3"&totalAmount=${tongtien}&currency="USD"`;
+            '//' + window.location.hostname + ':44322' + `/home/gateway?merchantId="test_gateway"&code=TC50171_3&totalAmount=${tongtien}&currency=USD`;
 
     }
 

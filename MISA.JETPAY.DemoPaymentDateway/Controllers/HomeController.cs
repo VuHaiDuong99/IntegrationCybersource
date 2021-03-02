@@ -34,9 +34,13 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
             
             return View();
         }
+        public IActionResult ordersuccess()
+        {
 
+            return View();
+        }
         [HttpPost]
-        public IActionResult Result(Card card)
+        public IActionResult Result(Card card, AmountDetail amountDetail, ClientReferenceInformation clientReference)
         {
             string url = "https://apitest.cybersource.com/pts/v2/payments";
             string SecretKey = "dlPkKIsuwoLnh8UobuS/mlAUwMIMUANS0PD1D8zMlQA=";
@@ -49,7 +53,7 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
             };
             var orderInformation = new OrderInformation()
             {
-                AmountDetails = new AmountDetail("102.21", "USD"),
+                AmountDetails = new AmountDetail(amountDetail.TotalAmount,amountDetail.Currency),
                 BillTo = new BillTo("John", "Doe", "1 Market St", "san francisco", "CA", "94105", "US", "test@cybs.com", "4158880000")
             };
 
@@ -74,16 +78,19 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
             header.Add("ContentType", "application/json");
             var serviceResult = new ServiceResult();
             serviceResult =  MISA.JETPAY.DemoPaymentGateway.ServiceDemo.BaseHttp.BaseHttpRestfull(url, "POST", objReqPaymentJson, header);
-            var mes = "hihih";
+            var mes = "";
             if(serviceResult.HttpResponse == "200")
             {
-                return View("Result");
+                return View();
             }
             else
             {
                 mes = "Thông tin nhập sai! Vui lòng nhập lại!";
                 ViewBag.mess = mes;
-                return View("gateway");
+                var param = string.Join(" ",$"?merchantId=test_gateway&code=TC50171_3&totalAmount={amountDetail.TotalAmount}&currency=USD");
+
+                var urlRedirect = $"gateway{param}";
+                return Redirect(urlRedirect);
             }
            
         }

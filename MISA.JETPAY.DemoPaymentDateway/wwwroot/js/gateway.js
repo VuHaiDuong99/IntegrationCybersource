@@ -217,6 +217,9 @@ class GatewayJS {
     initInforOrder() {
         var totalAmount = GetParameterValues('totalAmount');
         var currency = GetParameterValues('currency');
+        var totalAmount = GetParameterValues('totalAmount');
+      
+        var code = GetParameterValues('code');
         function GetParameterValues(param) {
             var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i = 0; i < url.length; i++) {
@@ -228,11 +231,13 @@ class GatewayJS {
         }
 
         
-        console.log(totalAmount);
-        console.log(currency);
-
+        
+     
         $('#txtGiaTriDonHang').val(totalAmount + " " + currency);
-
+        $('#totalAmount').val(totalAmount);
+        $('#currency').val(currency);
+        $('#code').val(code);
+     
     }
 
     /**

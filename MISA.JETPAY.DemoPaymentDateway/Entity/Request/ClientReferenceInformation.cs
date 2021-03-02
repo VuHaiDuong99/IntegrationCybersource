@@ -8,6 +8,10 @@ namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
 {
     public class ClientReferenceInformation
     {
+        public ClientReferenceInformation() { }
+        /// <summary>
+        /// Mã đơn hàng
+        /// </summary>
         [JsonProperty("code")]
         public string Code { get; set; }
         public ClientReferenceInformation(string code)

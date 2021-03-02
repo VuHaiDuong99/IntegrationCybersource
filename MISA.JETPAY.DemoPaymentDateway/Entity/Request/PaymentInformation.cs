@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MISA.JETPAY.DemoPaymentGateway.Entity.Request
 {
+    /// <summary>
+    /// Thông tin thẻ
+    /// </summary>
     public class PaymentInformation
     {
 
