@@ -95,11 +95,7 @@ namespace MISA.JETPAY.DemoPaymentDateway.Controllers
            
         }
       
-        public IActionResult cybersource()
-        {
-            
-            return View();
-        }
+     
         public IActionResult Privacy()
         {
             return View();
